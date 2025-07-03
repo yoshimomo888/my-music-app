@@ -1,11 +1,7 @@
 // src/firebase.js
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore"; // ← Firestore用
-// すでにある firebase.js にこれを追加
+import { getFirestore } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-
-export const auth = getAuth();
-export const provider = new GoogleAuthProvider();
 
 const firebaseConfig = {
   apiKey: "AIzaSyB3x9sfrB-7i-T6xa4KbICsDGI7LZV6_2w",
@@ -17,6 +13,8 @@ const firebaseConfig = {
   measurementId: "G-Z558H1YPNM"
 };
 
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
+const app = initializeApp(firebaseConfig); // ← 先に初期化！
 
+export const auth = getAuth(app); // ← ここが大事！
+export const provider = new GoogleAuthProvider();
+export const db = getFirestore(app);
