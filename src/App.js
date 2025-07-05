@@ -17,43 +17,21 @@ import {
 const encodeUrl = (url) => encodeURIComponent(url);
 const decodeUrl = (encoded) => decodeURIComponent(encoded);
 
-const songs = [
-  {
-    title: "東京",
-    artist: "アーティストA",
-    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-    image: "https://placehold.co/300x300?text=Tokyo",
-  },
-  {
-    title: "青春",
-    artist: "アーティストB",
-    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-    image: "https://placehold.co/300x300?text=Seisyun",
-  },
-  {
-    title: "深夜ドライブ",
-    artist: "アーティストC",
-    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-    image: "https://placehold.co/300x300?text=Doraibu",
-  },
-];
-
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const [user, setUser] = useState(null);
+  const [songs, setSongs] = useState([]);
   const audioRef = useRef(null);
 
-  // ログイン状態の監視
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
   }, []);
 
-  // Firestoreからお気に入りを取得
   useEffect(() => {
     const fetchFavorites = async () => {
       if (!user) return;
@@ -64,6 +42,16 @@ function App() {
     };
     fetchFavorites();
   }, [user]);
+
+  useEffect(() => {
+    const fetchSongs = async () => {
+      const songsRef = collection(db, 'songs');
+      const snapshot = await getDocs(songsRef);
+      const loadedSongs = snapshot.docs.map(doc => doc.data());
+      setSongs(loadedSongs);
+    };
+    fetchSongs();
+  }, []);
 
   const handleLogin = () => {
     signInWithPopup(auth, provider).catch(err => {
@@ -100,6 +88,7 @@ function App() {
     setIsPlaying(true);
   };
 
+  // お気に入り切り替え機能は残すが、ボタンは非表示に
   const toggleFavorite = async (song) => {
     if (!user) return alert("ログインしてね！");
     const docId = encodeUrl(song.url);
@@ -122,11 +111,11 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>🎵 よしももプレイヤー</h1>
+        <h1>Player</h1>
         <div>
           {user ? (
             <>
-              <span>👤 {user.displayName}</span>
+              <span>{user.displayName}</span>
               <button onClick={handleLogout}>ログアウト</button>
             </>
           ) : (
@@ -136,12 +125,13 @@ function App() {
       </header>
 
       <main className="app-main">
-        <button
+        {/* ↓ この部分を非表示に */}
+        {/* <button
           className="toggle-button"
           onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
         >
-          {showFavoritesOnly ? '🎧 全曲を表示' : '❤️ お気に入りだけ表示'}
-        </button>
+          {showFavoritesOnly ? '全曲を表示' : 'お気に入りだけ表示'}
+        </button> */}
 
         {currentSong && (
           <div className="now-playing">
@@ -157,9 +147,13 @@ function App() {
                 {currentSong?.url === song.url && isPlaying ? '⏸ 停止' : '▶ 再生'}
               </button>
 
-              <button className="heart-button" onClick={() => toggleFavorite(song)}>
-                {favorites.includes(song.url) ? '♥' : '♡'}
-              </button>
+              {/* ↓ このお気に入りボタンも非表示に */}
+              {/* <button
+                className={`heart-button ${favorites.includes(song.url) ? 'favorited' : ''}`}
+                onClick={() => toggleFavorite(song)}
+              >
+                {favorites.includes(song.url) ? '★' : '☆'}
+              </button> */}
 
               {song.title} - {song.artist}
             </li>
