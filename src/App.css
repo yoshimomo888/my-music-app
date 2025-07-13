@@ -94,3 +94,110 @@ body {
 .bottom-nav a:hover {
   opacity: 0.7;
 }
+/* App.css などに追加 */
+
+.video-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;           /* サムネイル間の余白 */
+}
+
+.video-card {
+  flex: 1 1 calc(33% - 16px); /* 3列に並べる例。余白分を差し引く */
+  max-width: calc(33% - 16px);
+  box-sizing: border-box;
+}
+
+.video-card img {
+  width: 100%;
+  border-radius: 4px;
+  display: block;
+}
+
+.video-card h3 {
+  margin: 8px 0;
+}
+/* ───────── 動画リストの横並び用 ───────── */
+.video-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;              /* カード間の余白 */
+  margin-top: 20px;
+}
+
+.video-card {
+  /* 幅を固定して横並びに */
+  flex: 0 1 calc(33.333% - 20px);
+  box-sizing: border-box;
+}
+
+.video-card h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+/* サムネイル */
+.video-thumb {
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;  /* 16:9 比率 */
+  object-fit: cover;
+  cursor: pointer;
+  display: block;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  background-size: cover;
+  background-position: center;
+}
+
+/* モーダル本体 */
+.video-modal {
+  display: none;
+  position: fixed;
+  inset: 0;                /* top:0; right:0; bottom:0; left:0; と同じ */
+  background-color: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* モーダルを表示するクラス */
+.video-modal.show {
+  display: flex;
+}
+
+/* モーダル内コンテナ */
+.video-modal-inner {
+  width: 90%;
+  max-width: 800px;
+}
+
+/* モーダルの video タグの角を丸く */
+.video-modal-inner video {
+  border-radius: 4px;
+}
+
+/* レスポンシブ対応例 */
+@media (max-width: 768px) {
+  .video-card {
+    flex: 0 1 calc(50% - 20px);
+  }
+}
+@media (max-width: 480px) {
+  .video-card {
+    flex: 0 1 100%;
+  }
+}
+.video-list {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.video-card {
+  flex: 0 0 auto;
+}
+
+.video-modal.show {
+  display: flex !important;
+}

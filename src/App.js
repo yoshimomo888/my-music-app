@@ -1,46 +1,10 @@
-// App.js
+// src/App.js
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Music from './Music';
-
-function Home() {
-  return (
-    <div className="app">
-      <header className="app-header">
-        <h1>Player</h1>
-      </header>
-      <main className="app-main">
-        <p>ホーム画面です</p>
-      </main>
-    </div>
-  );
-}
-
-function Video() {
-  return (
-    <div className="app">
-      <header className="app-header">
-        <h1>Video Page</h1>
-      </header>
-      <main className="app-main">
-        <p>ここに映像コンテンツが入ります。</p>
-      </main>
-    </div>
-  );
-}
-
-function Search() {
-  return (
-    <div className="app">
-      <header className="app-header">
-        <h1>Search Page</h1>
-      </header>
-      <main className="app-main">
-        <p>ここに検索機能が入ります。</p>
-      </main>
-    </div>
-  );
-}
+import Video from './Video';
+import Search from './Search';
+import Home from './Home';
 
 function App() {
   return (
