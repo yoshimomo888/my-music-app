@@ -7,7 +7,32 @@
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
+    {{
+  "short_name": "MyMusic",               // アプリ名の短縮形
+  "name": "My Music App",                // アプリの正式名称
+  "icons": [
     {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",                      // 起動URL
+  "display": "standalone",               // ホーム画面起動時にブラウザUIを除去
+  "theme_color": "#ffffff",              // ステータスバーやUIのテーマカラー
+  "background_color": "#ffffff"          // スプラッシュスクリーンの背景色
+}
+
       "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192"

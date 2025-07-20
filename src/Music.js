@@ -1,26 +1,46 @@
 // src/Music.js
 import React from 'react';
-import { useAudio } from './AudioContext';
 
-export default function Music({ songs }) {
-  const { currentTrack, isPlaying, play } = useAudio();
-
+const Music = ({ songs, playSong, currentSong, isPlaying }) => {
   return (
-    <div>
+    <div style={{ padding: 20 }}>
       <h2>♪ 曲一覧</h2>
-      <ul className="song-list">
-        {songs.map((song, i) => (
-          <li key={i}>
+      <ul style={{ listStyle: 'none', padding: 0 }}>
+        {songs.map((song, idx) => (
+          <li
+            key={idx}
+            style={{
+              border: '1px solid #ddd',
+              borderRadius: 6,
+              marginBottom: 12,
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: '12px',
+              cursor: 'pointer',      // カーソルを pointer に
+            }}
+            onClick={() => playSong(song)}   // 行全体で再生/停止
+          >
+            <span>
+              {song.title} — {song.artist}
+            </span>
             <button
-              className="play-button"
-              onClick={() => play(song.url)}
+              style={{
+                background: 'none',
+                border: 'none',
+                fontSize: '1.2rem',
+                cursor: 'pointer',
+              }}
             >
-              {currentTrack === song.url && isPlaying ? '⏸ 停止' : '▶ 再生'}
+              {currentSong?.url === song.url && isPlaying
+                ? '⏸'
+                : '▶'}
             </button>
-            {song.title} — {song.artist}
           </li>
         ))}
       </ul>
     </div>
   );
-}
+};
+
+export default Music;
