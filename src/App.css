@@ -119,9 +119,9 @@ body {
 /* ──────────────────────────────── */
 .video-list {
   display: flex;
-  flex-wrap: wrap;           /* 折り返し対応 */
-  gap: 16px;                 /* カード間の余白 */
-  justify-content: center;   /* 中央寄せ */
+  flex-wrap: wrap;
+  gap: 16px;               /* カード間の余白 */
+  justify-content: center; /* 中央寄せ */
   margin-top: 20px;
 }
 
@@ -136,10 +136,8 @@ body {
   font-size: 1rem;
 }
 
-/* サムネイル */
 .video-card img {
   width: 100%;
-  height: auto;
   display: block;
   object-fit: cover;
   border-radius: 4px;
@@ -158,7 +156,7 @@ body {
 
 @media (max-width: 480px) {
   .video-card {
-    flex: 1 1 100%;           /* 1カラム */
+    flex: 1 1 100%;            /* 1カラム */
   }
 }
 
@@ -187,4 +185,97 @@ body {
 .video-modal-inner video {
   width: 100%;
   border-radius: 4px;
+}
+
+.fixed-player {
+  position: fixed;
+  bottom: 60px; /* bottom-nav の上 */
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+  z-index: 900;
+}
+.fp-jacket {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 0.75rem;
+}
+.fp-info {
+  flex: 1;
+  overflow: hidden;
+}
+.fp-title,
+.fp-artist {
+  margin: 0;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fp-title {
+  font-weight: bold;
+}
+.fp-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+/* ──────────────────────────────── */
+/* 固定プレーヤー                    */
+/* ──────────────────────────────── */
+.fixed-player {
+  position: fixed;
+  bottom: 60px; /* bottom-nav の上に表示 */
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+  z-index: 900;
+}
+
+.fp-jacket {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 0.75rem;
+}
+
+.fp-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.fp-title,
+.fp-artist {
+  margin: 0;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fp-title {
+  font-weight: bold;
+}
+
+.fp-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
 }
